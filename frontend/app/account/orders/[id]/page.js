@@ -1,11 +1,19 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import { api } from "../../../../lib/api";
 
 const STEPS = ["PENDING", "PROCESSING", "SHIPPED", "DELIVERED"];
 
 export default function OrderDetailPage() {
+  return (
+    <Suspense fallback={<div className="container-wide py-24 text-center">Loading order…</div>}>
+      <OrderDetailPageInner />
+    </Suspense>
+  );
+}
+
+function OrderDetailPageInner() {
   const { id } = useParams();
   const searchParams = useSearchParams();
   const [order, setOrder] = useState(null);

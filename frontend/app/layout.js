@@ -11,6 +11,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
+// The official Sigma Cloth Store Facebook page — kept in sync with Footer.js.
+const FACEBOOK_URL = process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/profile.php?id=61592511905411";
+
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -50,7 +53,7 @@ export default function RootLayout({ children }) {
     url: siteUrl,
     sameAs: [
       process.env.NEXT_PUBLIC_INSTAGRAM_URL,
-      process.env.NEXT_PUBLIC_FACEBOOK_URL,
+      FACEBOOK_URL,
       process.env.NEXT_PUBLIC_TIKTOK_URL,
       process.env.NEXT_PUBLIC_YOUTUBE_URL,
     ].filter(Boolean),

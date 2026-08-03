@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import { api, setAccessToken } from "../lib/api";
+import { api, setAccessToken, API_URL } from "../lib/api";
 
 const AuthContext = createContext(null);
 
@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
     // so a page reload doesn't log the user out.
     (async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/refresh`, {
+        const res = await fetch(`${API_URL}/api/auth/refresh`, {
           method: "POST",
           credentials: "include",
         });

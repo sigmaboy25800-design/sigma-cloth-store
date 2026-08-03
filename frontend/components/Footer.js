@@ -3,6 +3,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { api } from "../lib/api";
 
+// The official Sigma Cloth Store Facebook page. NEXT_PUBLIC_FACEBOOK_URL can
+// override this in .env, but the button must never be a dead link, so we
+// always fall back to the real profile if the env var isn't set.
+const FACEBOOK_URL = process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/profile.php?id=61592511905411";
+
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState(null);
@@ -66,10 +71,16 @@ export default function Footer() {
           </form>
           {status === "done" && <p className="text-xs text-bone/50 mt-2">Thanks — check your inbox to confirm.</p>}
           <div className="flex gap-4 mt-6 text-sm">
-            <a href={process.env.NEXT_PUBLIC_INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram</a>
-            <a href={process.env.NEXT_PUBLIC_FACEBOOK_URL} target="_blank" rel="noreferrer">Facebook</a>
-            <a href={process.env.NEXT_PUBLIC_TIKTOK_URL} target="_blank" rel="noreferrer">TikTok</a>
-            <a href={process.env.NEXT_PUBLIC_YOUTUBE_URL} target="_blank" rel="noreferrer">YouTube</a>
+            {process.env.NEXT_PUBLIC_INSTAGRAM_URL && (
+              <a href={process.env.NEXT_PUBLIC_INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram</a>
+            )}
+            <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer">Facebook</a>
+            {process.env.NEXT_PUBLIC_TIKTOK_URL && (
+              <a href={process.env.NEXT_PUBLIC_TIKTOK_URL} target="_blank" rel="noopener noreferrer">TikTok</a>
+            )}
+            {process.env.NEXT_PUBLIC_YOUTUBE_URL && (
+              <a href={process.env.NEXT_PUBLIC_YOUTUBE_URL} target="_blank" rel="noopener noreferrer">YouTube</a>
+            )}
           </div>
         </div>
       </div>

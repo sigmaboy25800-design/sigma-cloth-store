@@ -1,10 +1,18 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import ProductCard from "../../components/ProductCard";
 import { api, API_URL } from "../../lib/api";
 
 export default function ShopPage() {
+  return (
+    <Suspense fallback={<div className="container-wide py-12 text-sm text-ink/50">Loading…</div>}>
+      <ShopPageInner />
+    </Suspense>
+  );
+}
+
+function ShopPageInner() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [items, setItems] = useState([]);
